@@ -84,7 +84,7 @@ for t in armor_types:
 			print("ERROR: could not open file for writing: {}".format(outfile))
 			continue
 
-		buffer.write("\n--- 3D Armor {}\n--\n--  @topic {}\n\n\n{}\n".format(topic, topic.lower(), "\n\n".join(items)))
+		buffer.write("\n--- Armor {}\n--\n--  @topic {}\n\n\n{}\n".format(topic, topic.lower(), "\n\n".join(items)))
 		buffer.close()
 
 		print("{} exported to\t{}".format(topic.lower(), outfile))

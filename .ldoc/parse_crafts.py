@@ -10,7 +10,7 @@ script = os.path.basename(path)
 d_root = os.path.dirname(os.path.dirname(path))
 d_ldoc = os.path.join(d_root, ".ldoc")
 
-craftfile = os.path.realpath(os.path.join(d_root, "3d_armor/armor.lua"))
+craftfile = os.path.realpath(os.path.join(d_root, "armor/armor.lua"))
 if not os.path.isfile(craftfile):
 	print("ERROR: craft file does not exist for parsing: {}".format(craftfile))
 	sys.exit(errnor.ENOENT)
@@ -40,7 +40,7 @@ if not buffer:
 	print("ERROR: could not open file for writing: {}".format(outfile))
 	sys.exit(errno.EIO)
 
-buffer.write("\n--- 3D Armor Crafting\n--\n--  @topic crafting\n\n{}\n".format(craft))
+buffer.write("\n--- Armor Crafting\n--\n--  @topic crafting\n\n{}\n".format(craft))
 buffer.close()
 
 print("crafts exported to\t{}".format(outfile))

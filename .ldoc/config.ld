@@ -14,8 +14,8 @@ if import then
 	ipairs = import("ipairs")
 end
 
-project = "3d_armor"
-title = "3D Armor"
+project = "armor"
+title = "Armor"
 format = "markdown"
 not_luadoc = true
 boilerplate = false
@@ -24,7 +24,7 @@ style = true
 favicon = "https://www.minetest.net/media/icon.svg"
 
 file = {
-	"3d_armor/api.lua",
+	"armor/api.lua",
 	".ldoc/settings.luadoc",
 	--".ldoc/armors.luadoc",
 	".ldoc/helmets.luadoc",

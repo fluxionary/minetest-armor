@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # This script will format "settingtypes.txt" file found at the root
-# of 3d_armor modpack into a format readable by LDoc.
+# of armor modpack into a format readable by LDoc.
 
 import sys, os, errno, codecs
 
@@ -105,7 +105,7 @@ for f in filtered:
 	parse_setting(f)
 
 outfile = os.path.join(d_ldoc, "settings.luadoc")
-data_out = "\n--- 3D Armor Settings\n--\n--  @topic settings\n\n\n{}\n".format("\n\n".join(settings))
+data_out = "\n--- Armor Settings\n--\n--  @topic settings\n\n\n{}\n".format("\n\n".join(settings))
 
 o_stream = codecs.open(outfile, "w", "utf-8")
 if not o_stream:

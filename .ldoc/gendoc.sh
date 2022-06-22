@@ -13,7 +13,7 @@ f_config="${d_ldoc}/config.ld"
 cd "${d_ldoc}/.."
 
 d_root="$(pwd)"
-d_export="${d_export:-${d_root}/3d_armor/docs/reference}"
+d_export="${d_export:-${d_root}/armor/docs/reference}"
 d_data="${d_export}/data"
 
 cmd_ldoc="${d_ldoc}/ldoc/ldoc.lua"
@@ -72,7 +72,7 @@ sed -i \
 printf "\ncopying textures ..."
 mkdir -p "${d_data}"
 texture_count=0
-for d_mod in "3d_armor" "shields"; do
+for d_mod in "armor" "shields"; do
 	printf "\rcopying textures from ${d_mod} ...\n"
 	for png in $(find "${d_root}/${d_mod}/textures" -maxdepth 1 -type f -name "*.png"); do
 		if test -f "${d_data}/$(basename ${png})"; then
