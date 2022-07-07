@@ -11,7 +11,7 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 minetest.register_on_dieplayer(function(player)
-    local name, armor_inv = armor:get_valid_player(player, "[on_dieplayer]")
+    local name, armor_inv = armor.get_valid_player(player, "[on_dieplayer]")
     if not name then
         return
     end
@@ -20,12 +20,12 @@ minetest.register_on_dieplayer(function(player)
         local stack = armor_inv:get_stack("armor", i)
         if stack:get_count() > 0 then
             table.insert(drop, stack)
-            armor:run_callbacks("on_unequip", player, i, stack)
+            armor.run_callbacks("on_unequip", player, i, stack)
             armor_inv:set_stack("armor", i, nil)
         end
     end
-    armor:save_armor_inventory(player)
-    armor:set_player_armor(player)
+    armor.save_armor_inventory(player)
+    armor.set_player_armor(player)
     local pos = player:get_pos()
     if pos and armor.config.destroy == false then
         minetest.after(armor.config.bones_delay, function()
@@ -65,7 +65,7 @@ minetest.register_on_punchplayer(function(player, hitter,
     if name and hit_ip and minetest.is_protected(player:get_pos(), "") then
         return
     elseif name then
-        armor:punch(player, hitter, time_from_last_punch, tool_capabilities)
+        armor.punch(player, hitter, time_from_last_punch, tool_capabilities)
         armor.last_punch_time[name] = minetest.get_gametime()
     end
 end)
@@ -82,7 +82,7 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
             -- check if armor damage was handled by fire or on_punchplayer
             local time = armor.last_punch_time[name] or 0
             if time == 0 or time + 1 < minetest.get_gametime() then
-                armor:punch(player)
+                armor.punch(player)
             end
         end
     end
@@ -101,7 +101,7 @@ minetest.register_globalstep(function(dtime)
         local remove = init_player_armor(player) == true
         armor.pending_players[player] = count + 1
         if remove == false and count > armor.config.init_times then
-            minetest.log("warning", S("3d_armor: Failed to initialize player"))
+            minetest.log("warning", S("3d_armor. Failed to initialize player"))
             remove = true
         end
         if remove == true then
@@ -130,7 +130,7 @@ minetest.register_on_player_hpchange(function(player, hp_change, reason)
             for _, igniter in pairs(armor.fire_nodes) do
                 if reason.node == igniter[1] then
                     if armor.def[name].fire < igniter[2] then
-                        armor:punch(player, "fire")
+                        armor.punch(player, "fire")
                     else
                         hp_change = 0
                     end

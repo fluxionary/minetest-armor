@@ -1,15 +1,13 @@
 
 local transparent_armor = armor.settings.transparent_armor
 
-local S = armor.S
-
 local skin_previews = {}
 
 --- Updates visuals.
 --
---  @function armor:update_player_visuals
+--  @function armor.update_player_visuals
 --  @tparam ObjectRef player
-function armor:update_player_visuals(player)
+function armor.update_player_visuals(player)
     if not player then
         return
     end
@@ -27,9 +25,9 @@ end
 
 --- Sets player's armor attributes.
 --
---  @function armor:set_player_armor
+--  @function armor.set_player_armor
 --  @tparam ObjectRef player
-function armor:set_player_armor(player)
+function armor.set_player_armor(player)
     local name, armor_inv = self:get_valid_player(player, "[set_player_armor]")
     if not name then
         return
@@ -145,7 +143,7 @@ function armor:set_player_armor(player)
         self.def[name][phys] = physics[phys]
     end
     if use_armor_monoid then
-        armor_monoid.monoid:add_change(player, change, "3d_armor:armor")
+        armor_monoid.monoid:add_change(player, change, "3d_armor.armor")
     else
         -- Preserve immortal group (damage disabled for player)
         local immortal = player:get_armor_groups().immortal
@@ -156,11 +154,11 @@ function armor:set_player_armor(player)
     end
     if use_player_monoids then
         player_monoids.speed:add_change(player, physics.speed,
-            "3d_armor:physics")
+            "3d_armor.physics")
         player_monoids.jump:add_change(player, physics.jump,
-            "3d_armor:physics")
+            "3d_armor.physics")
         player_monoids.gravity:add_change(player, physics.gravity,
-            "3d_armor:physics")
+            "3d_armor.physics")
     elseif use_pova_mod then
         -- only add the changes, not the default 1.0 for each physics setting
         pova.add_override(name, "3d_armor", {
@@ -185,7 +183,7 @@ end
 
 --- Action when armor is punched.
 --
---  @function armor:punch
+--  @function armor.punch
 --  @tparam ObjectRef player Player wearing the armor.
 --  @tparam ObjectRef hitter Entity attacking player.
 --  @tparam[opt] int time_from_last_punch Time in seconds since last punch action.
@@ -277,14 +275,14 @@ end
 
 --- Action when armor is damaged.
 --
---  @function armor:damage
+--  @function armor.damage
 --  @tparam ObjectRef player
 --  @tparam int index Inventory index where armor is equipped.
 --  @tparam ItemStack stack Armor item receiving damaged.
 --  @tparam int use Amount of wear to add to armor item.
 armor.damage = function(self, player, index, stack, use)
     local old_stack = ItemStack(stack)
-    local worn_armor = armor:get_weared_armor_elements(player)
+    local worn_armor = armor.get_weared_armor_elements(player)
     local armor_worn_cnt = 0
     for k, v in pairs(worn_armor) do
         armor_worn_cnt = armor_worn_cnt + 1
@@ -302,7 +300,7 @@ end
 
 --- Get elements of equipped armor.
 --
---  @function armor:get_weared_armor_elements
+--  @function armor.get_weared_armor_elements
 --  @tparam ObjectRef player
 --  @treturn table List of equipped armors.
 armor.get_weared_armor_elements = function(self, player)
@@ -323,7 +321,7 @@ end
 
 --- Equips a piece of armor to a player.
 --
---  @function armor:equip
+--  @function armor.equip
 --  @tparam ObjectRef player Player to whom item is equipped.
 --  @tparam ItemStack itemstack Armor item to be equipped.
 --  @treturn ItemStack Leftover item stack.
@@ -353,7 +351,7 @@ end
 
 --- Unequips a piece of armor from a player.
 --
---  @function armor:unequip
+--  @function armor.unequip
 --  @tparam ObjectRef player Player from whom item is removed.
 --  @tparam string armor_element Armor type identifier associated with the item
 --  to be removed ("head", "torso", "hands", "shield", "legs", "feet", etc.).
@@ -384,7 +382,7 @@ end
 
 --- Removes all armor worn by player.
 --
---  @function armor:remove_all
+--  @function armor.remove_all
 --  @tparam ObjectRef player
 armor.remove_all = function(self, player)
     local name, inv = self:get_valid_player(player, "[remove_all]")
@@ -400,7 +398,7 @@ local skin_mod
 
 --- Retrieves player's current skin.
 --
---  @function armor:get_player_skin
+--  @function armor.get_player_skin
 --  @tparam string name Player name.
 --  @treturn string Skin filename.
 armor.get_player_skin = function(self, name)
@@ -416,7 +414,7 @@ end
 
 --- Updates skin.
 --
---  @function armor:update_skin
+--  @function armor.update_skin
 --  @tparam string name Player name.
 armor.update_skin = function(self, name)
     minetest.after(0, function()
@@ -430,7 +428,7 @@ end
 
 --- Adds preview for armor inventory.
 --
---  @function armor:add_preview
+--  @function armor.add_preview
 --  @tparam string preview Preview image filename.
 armor.add_preview = function(self, preview)
     skin_previews[preview] = true
@@ -438,11 +436,11 @@ end
 
 --- Retrieves preview for armor inventory.
 --
---  @function armor:get_preview
+--  @function armor.get_preview
 --  @tparam string name Player name.
 --  @treturn string Preview image filename.
 armor.get_preview = function(self, name)
-    local preview = string.gsub(armor:get_player_skin(name), ".png", "_preview.png")
+    local preview = string.gsub(armor.get_player_skin(name), ".png", "_preview.png")
     if skin_previews[preview] then
         return preview
     end
@@ -451,7 +449,7 @@ end
 
 --- Retrieves armor formspec.
 --
---  @function armor:get_armor_formspec
+--  @function armor.get_armor_formspec
 --  @tparam string name Player name.
 --  @tparam[opt] bool listring Use `listring` formspec element (default: `false`).
 --  @treturn string Formspec formatted string.
@@ -479,7 +477,7 @@ end
 
 --- Retrieves element.
 --
---  @function armor:get_element
+--  @function armor.get_element
 --  @tparam string item_name
 --  @return Armor element.
 armor.get_element = function(self, item_name)
@@ -492,7 +490,7 @@ end
 
 --- Serializes armor inventory.
 --
---  @function armor:serialize_inventory_list
+--  @function armor.serialize_inventory_list
 --  @tparam table list Inventory contents.
 --  @treturn string
 armor.serialize_inventory_list = function(self, list)
@@ -505,7 +503,7 @@ end
 
 --- Deserializes armor inventory.
 --
---  @function armor:deserialize_inventory_list
+--  @function armor.deserialize_inventory_list
 --  @tparam string list_string Serialized inventory contents.
 --  @treturn table
 armor.deserialize_inventory_list = function(self, list_string)
@@ -519,7 +517,7 @@ end
 
 --- Loads armor inventory.
 --
---  @function armor:load_armor_inventory
+--  @function armor.load_armor_inventory
 --  @tparam ObjectRef player
 --  @treturn bool
 armor.load_armor_inventory = function(self, player)
@@ -539,7 +537,7 @@ end
 --
 --  Inventory is stored in `PlayerMetaRef` string "3d\_armor\_inventory".
 --
---  @function armor:save_armor_inventory
+--  @function armor.save_armor_inventory
 --  @tparam ObjectRef player
 armor.save_armor_inventory = function(self, player)
     local _, inv = self:get_valid_player(player, "[save_armor_inventory]")
@@ -554,7 +552,7 @@ end
 --
 --  DEPRECATED: Legacy inventory support.
 --
---  @function armor:update_inventory
+--  @function armor.update_inventory
 --  @param player
 armor.update_inventory = function(self, player)
     -- DEPRECATED: Legacy inventory support
@@ -562,7 +560,7 @@ end
 
 --- Sets inventory stack.
 --
---  @function armor:set_inventory_stack
+--  @function armor.set_inventory_stack
 --  @tparam ObjectRef player
 --  @tparam int i Armor inventory index.
 --  @tparam ItemStack stack Armor item.
@@ -576,11 +574,11 @@ end
 
 --- Checks for a player that can use armor.
 --
---  @function armor:get_valid_player
+--  @function armor.get_valid_player
 --  @tparam ObjectRef player
 --  @tparam string msg Additional info for log messages.
 --  @treturn list Player name & armor inventory.
---  @usage local name, inv = armor:get_valid_player(player, "[equip]")
+--  @usage local name, inv = armor.get_valid_player(player, "[equip]")
 armor.get_valid_player = function(self, player, msg)
     msg = msg or ""
     if not player then
@@ -629,7 +627,7 @@ end
 
 local function validate_armor_inventory(player)
     -- Workaround for detached inventory swap exploit
-    local _, inv = armor:get_valid_player(player, "[validate_armor_inventory]")
+    local _, inv = armor.get_valid_player(player, "[validate_armor_inventory]")
     local pos = player:get_pos()
     if not inv then
         return
@@ -638,7 +636,7 @@ local function validate_armor_inventory(player)
     local attribute_meta = player:get_meta() -- I know, the function's name is weird but let it be like that. ;)
     local armor_list_string = attribute_meta:get_string("3d_armor_inventory")
     if armor_list_string then
-        local armor_list = armor:deserialize_inventory_list(armor_list_string)
+        local armor_list = armor.deserialize_inventory_list(armor_list_string)
         for i, stack in ipairs(armor_list) do
             if stack:get_count() > 0 then
                 armor_prev[stack:get_name()] = i
@@ -651,13 +649,13 @@ local function validate_armor_inventory(player)
         local stack = inv:get_stack("armor", i)
         if stack:get_count() > 0 then
             local item = stack:get_name()
-            local element = armor:get_element(item)
+            local element = armor.get_element(item)
             if element and not elements[element] then
                 if armor_prev[item] then
                     armor_prev[item] = nil
                 else
                     -- Item was not in previous inventory
-                    armor:run_callbacks("on_equip", player, i, stack)
+                    armor.run_callbacks("on_equip", player, i, stack)
                 end
                 elements[element] = true;
             else
@@ -677,7 +675,7 @@ local function validate_armor_inventory(player)
     for item, i in pairs(armor_prev) do
         local stack = ItemStack(item)
         -- Previous item is not in current inventory
-        armor:run_callbacks("on_unequip", player, i, stack)
+        armor.run_callbacks("on_unequip", player, i, stack)
     end
 end
 
@@ -685,24 +683,24 @@ function armor.api.create_armor_inventory(player_name)
     return minetest.create_detached_inventory(player_name .. "_armor", {
         on_put = function(inv, listname, index, stack, player)
             armor.api.validate_armor_inventory(player)
-            armor:save_armor_inventory(player)
-            armor:set_player_armor(player)
+            armor.save_armor_inventory(player)
+            armor.set_player_armor(player)
         end,
         on_take = function(inv, listname, index, stack, player)
             armor.api.validate_armor_inventory(player)
-            armor:save_armor_inventory(player)
-            armor:set_player_armor(player)
+            armor.save_armor_inventory(player)
+            armor.set_player_armor(player)
         end,
         on_move = function(inv, from_list, from_index, to_list, to_index, count, player)
             armor.api.validate_armor_inventory(player)
-            armor:save_armor_inventory(player)
-            armor:set_player_armor(player)
+            armor.save_armor_inventory(player)
+            armor.set_player_armor(player)
         end,
         allow_put = function(inv, listname, index, put_stack, player)
             if player:get_player_name() ~= player_name then
                 return 0
             end
-            local element = armor:get_element(put_stack:get_name())
+            local element = armor.get_element(put_stack:get_name())
             if not element then
                 return 0
             end
@@ -746,20 +744,20 @@ function armor.api.init_player(player_name)
     local armor_inv = armor.api.create_armor_inventory()
     armor_inv:set_size("armor", armor.settings.inv_size)
 
-    if not armor:load_armor_inventory(initplayer) and armor.migrate_old_inventory then
+    if not armor.load_armor_inventory(initplayer) and armor.migrate_old_inventory then
         local player_inv = initplayer:get_inventory()
         player_inv:set_size("armor", armor.settings.inv_size)
         for i = 1, armor.settings.inv_size do
             local stack = player_inv:get_stack("armor", i)
             armor_inv:set_stack("armor", i, stack)
         end
-        armor:save_armor_inventory(initplayer)
+        armor.save_armor_inventory(initplayer)
         player_inv:set_size("armor", 0)
     end
     for i = 1, armor.settings.inv_size do
         local stack = armor_inv:get_stack("armor", i)
         if stack:get_count() > 0 then
-            armor:run_callbacks("on_equip", initplayer, i, stack)
+            armor.run_callbacks("on_equip", initplayer, i, stack)
         end
     end
     armor.def[name] = {
@@ -778,7 +776,7 @@ function armor.api.init_player(player_name)
     for group, _ in pairs(armor.registered_groups) do
         armor.def[name].groups[group] = 0
     end
-    local skin = armor:get_player_skin(name)
+    local skin = armor.get_player_skin(name)
     armor.textures[name] = {
         skin = skin,
         armor = "3d_armor_trans.png",
@@ -795,7 +793,7 @@ function armor.api.init_player(player_name)
             end
         end
     end
-    armor:set_player_armor(initplayer)
+    armor.set_player_armor(initplayer)
     return true
 end
 

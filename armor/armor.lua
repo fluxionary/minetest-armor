@@ -1,6 +1,6 @@
 --- Admin Helmet
 --
---  @helmet 3d_armor:helmet_admin
+--  @helmet 3d_armor.helmet_admin
 --  @img 3d_armor_inv_helmet_admin.png
 --  @grp armor_head 1
 --  @grp armor_heal 100
@@ -8,7 +8,7 @@
 --  @grp armor_water 1
 --  @grp not_in_creative_inventory 1
 --  @armorgrp fleshy 100
-armor:register_armor("3d_armor:helmet_admin", {
+armor.register_armor("3d_armor.helmet_admin", {
     description = S("Admin Helmet"),
     inventory_image = "3d_armor_inv_helmet_admin.png",
     armor_groups = {fleshy = 1000},
@@ -26,14 +26,14 @@ armor:register_armor("3d_armor:helmet_admin", {
 
 --- Admin Chestplate
 --
---  @chestplate 3d_armor:chestplate_admin
+--  @chestplate 3d_armor.chestplate_admin
 --  @img 3d_armor_inv_chestplate_admin.png
 --  @grp armor_torso 1
 --  @grp armor_heal 100
 --  @grp armor_use 0
 --  @grp not_in_creative_inventory 1
 --  @armorgrp fleshy 100
-armor:register_armor("3d_armor:chestplate_admin", {
+armor.register_armor("3d_armor.chestplate_admin", {
     description = S("Admin Chestplate"),
     inventory_image = "3d_armor_inv_chestplate_admin.png",
     armor_groups = {fleshy = 100},
@@ -46,14 +46,14 @@ armor:register_armor("3d_armor:chestplate_admin", {
 
 --- Admin Leggings
 --
---  @leggings 3d_armor:leggings_admin
+--  @leggings 3d_armor.leggings_admin
 --  @img 3d_armor_inv_leggings_admin.png
 --  @grp armor_legs 1
 --  @grp armor_heal 100
 --  @grp armor_use 0
 --  @grp not_in_creative_inventory 1
 --  @armorgrp fleshy 100
-armor:register_armor("3d_armor:leggings_admin", {
+armor.register_armor("3d_armor.leggings_admin", {
     description = S("Admin Leggings"),
     inventory_image = "3d_armor_inv_leggings_admin.png",
     armor_groups = {fleshy = 100},
@@ -66,14 +66,14 @@ armor:register_armor("3d_armor:leggings_admin", {
 
 --- Admin Boots
 --
---  @boots 3d_armor:boots_admin
+--  @boots 3d_armor.boots_admin
 --  @img 3d_armor_inv_boots_admin.png
 --  @grp armor_feet 1
 --  @grp armor_heal 100
 --  @grp armor_use 0
 --  @grp not_in_creative_inventory 1
 --  @armorgrp fleshy 100
-armor:register_armor("3d_armor:boots_admin", {
+armor.register_armor("3d_armor.boots_admin", {
     description = S("Admin Boots"),
     inventory_image = "3d_armor_inv_boots_admin.png",
     armor_groups = {fleshy = 100},
@@ -84,8 +84,8 @@ armor:register_armor("3d_armor:boots_admin", {
     end,
 })
 
-minetest.register_alias("adminboots", "3d_armor:boots_admin")
-minetest.register_alias("adminhelmet", "3d_armor:helmet_admin")
-minetest.register_alias("adminchestplate", "3d_armor:chestplate_admin")
-minetest.register_alias("adminleggings", "3d_armor:leggings_admin")
+minetest.register_alias("adminboots", "3d_armor.boots_admin")
+minetest.register_alias("adminhelmet", "3d_armor.helmet_admin")
+minetest.register_alias("adminchestplate", "3d_armor.chestplate_admin")
+minetest.register_alias("adminleggings", "3d_armor.leggings_admin")
 

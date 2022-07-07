@@ -22,14 +22,14 @@ end
 
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-    local name = armor:get_valid_player(player, "[on_player_receive_fields]")
+    local name = armor.get_valid_player(player, "[on_player_receive_fields]")
     if not name then
         return
     end
     local player_name = player:get_player_name()
     for field, _ in pairs(fields) do
         if string.find(field, "skins_set") then
-            armor:update_skin(player_name)
+            armor.update_skin(player_name)
         end
     end
 end)

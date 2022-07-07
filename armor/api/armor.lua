@@ -1,17 +1,17 @@
 --- Registers a new armor item.
 --
---  @function armor:register_armor
---  @tparam string name Armor item technical name (ex: "3d\_armor:helmet\_gold").
+--  @function armor.register_armor
+--  @tparam string name Armor item technical name (ex: "3d\_armor.helmet\_gold").
 --  @tparam ArmorDef def Armor definition table.
---  @usage armor:register_armor("3d_armor:helmet_wood", {
+--  @usage armor.register_armor("3d_armor.helmet_wood", {
 --    description = "Wood Helmet",
 --    inventory_image = "3d_armor_inv_helmet_wood.png",
 --    groups = {armor_head=1, armor_heal=0, armor_use=2000, flammable=1},
 --    armor_groups = {fleshy=5},
 --    damage_groups = {cracky=3, snappy=2, choppy=3, crumbly=2, level=1},
 --  })
-function armor:register_armor(name, def)
-    def.on_secondary_use = def.on_secondary_use or function(...) armor:equip(...) end
+function armor.register_armor(name, def)
+    def.on_secondary_use = def.on_secondary_use or function(...) armor.equip(...) end
 
     def.on_place = def.on_place or function(itemstack, player, pointed_thing)
         if pointed_thing.type == "node" and player and not player:get_player_control().sneak then
